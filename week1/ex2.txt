@@ -1,0 +1,25 @@
+grep --help
+clear
+cd week1
+cd ..
+rm -r week1
+mkdir week1
+cd week1
+grep --help
+grep -r gcc ~
+clear
+cd ..
+cd /usr/bin
+grep -r gcc
+clear
+grep -r gcc | sort -r > ~/week1/ex1.txt
+cd ~
+cd week1
+gedit ex1.txt
+cat ex1.txst
+cat ex1.txt
+clear
+history
+history --help
+clear
+history -a ex2.txt
