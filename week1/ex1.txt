@@ -1,113 +1,18 @@
-inxi:	unshift @gccs, $gcc;
-inxi:		@temp = globber('/usr/bin/gcc-*');
-inxi:sub get_gcc_data {
-inxi:		# strip out: gcc (Debian 6.3.0-18) 6.3.0 20170516
-inxi:	return @gccs;
-inxi:				push @gccs, $1;
-inxi:	my @gccs = get_gcc_data();
-inxi:	my @files = main::globber('/usr/bin/gcc*');
-inxi:	my ($gcc,@data,@gccs,@temp);
-inxi:	my $gcc_alt = '';
-inxi:		my $compiler = ($b_gcc || $b_clang) ? '': 'N/A';
-inxi:	my ($b_gcc,$gcc,$index,$ref,%row);
-inxi:	log_data('dump','@gccs',\@gccs) if $b_log;
-inxi:	if (my $program = check_program('gcc') ){
-inxi:	if (@gccs){
-inxi:			if (/\/gcc-([0-9.]+)$/){
-inxi:	if ($gcc){
-inxi:		if ($extra > 1 && @gccs){
-inxi:			if ( $extra > 1 && $gcc_alt){
-inxi:		if ($b_gcc){
-inxi:		# glob /usr/bin for gccs, strip out all non numeric values
-inxi:	['gcc','--version'],
-inxi:		# gcc (GCC) 4.2.2 20070831 prerelease [FreeBSD]
-inxi:	'gcc' => ['^gcc',3,'--version','GCC',1,0,0],
-inxi:	'gcc-apple' => ['Apple[[:space:]]LLVM',2,'--version','LLVM',1,0,0],
-inxi:	['2', '-S', '', "Kernel gcc version; system base of distro (if relevant 
-inxi:	['2', '-I', '', "Other detected installed gcc versions (if present). System 
-inxi:				$working[1] =~ /.*(gcc|clang)\sversion\s([\S]+)\s.*/;
-inxi:		$result =~ /(gcc|clang).*version\s([\S]+)/;
-inxi:		# $result = $result =~ /\*(gcc|clang)\*eval\*/;
-inxi:		$gcc = shift @gccs;
-inxi:		$gcc =~ s/\([^\)]*\)//g;
-inxi:	$gcc ||= 'N/A';
-inxi:		$gcc = get_piece($gcc,2);
-inxi:		$gcc = awk(\@data,'^gcc');
-inxi:			$gcc_alt = join '/', @gccs;
-inxi:		$data{'gcc-versions'} = undef;
-inxi:		$data{'gcc-versions'} = join "\n",@files;
-inxi:			$data{$data_name}[$index]{main::key($num++,'gcc')} = $gcc;
-inxi:				$data{$data_name}[$index]{main::key($num++,'alt')} = $gcc_alt;
-inxi:		$b_gcc = 1;
-h2xs:      my @styles = $Config{gccversion} ? qw(C++ C9X GNU) : qw(C++ C9X);
-h2ph:# non-GCC?) C compilers, but gcc uses additional include directories.
-h2ph:    my $from_gcc   = `LC_ALL=C $Config{cc} -v -E - < /dev/null 2>&1 | awk '/^#include/, /^End of search list/' | grep '^ '`;
-h2ph:    length($from_gcc) ? (split(' ', $from_gcc), $Config{usrinc}) : ($Config{usrinc});
-c99-gcc:# The following options are the same (as of gcc-3.3):
-c99-gcc:exec gcc $extra_flag ${1+"$@"}
-c89-gcc:# The following options are the same (as of gcc-2.95):
-c89-gcc:exec gcc $extra_flag ${1+"$@"}
-Binary file zipsplit matches
-Binary file zipnote matches
-Binary file zip matches
-Binary file zipinfo matches
-Binary file zipcloak matches
-Binary file xgettext matches
-Binary file x86_64-linux-gnu-strip matches
-Binary file x86_64-linux-gnu-readelf matches
-Binary file x86_64-linux-gnu-objdump matches
-Binary file x86_64-linux-gnu-objcopy matches
-Binary file x86_64-linux-gnu-nm matches
-Binary file x86_64-linux-gnu-ld.gold matches
-Binary file x86_64-linux-gnu-ld.bfd matches
-Binary file x86_64-linux-gnu-gcov-tool-9 matches
-Binary file x86_64-linux-gnu-gcov-dump-9 matches
-Binary file x86_64-linux-gnu-gcov-9 matches
-Binary file x86_64-linux-gnu-gcc-ranlib-9 matches
-Binary file x86_64-linux-gnu-gcc-nm-9 matches
-Binary file x86_64-linux-gnu-gcc-ar-9 matches
-Binary file x86_64-linux-gnu-gcc-9 matches
-Binary file x86_64-linux-gnu-g++-9 matches
-Binary file x86_64-linux-gnu-dwp matches
-Binary file x86_64-linux-gnu-cpp-9 matches
-Binary file x86_64-linux-gnu-as matches
-Binary file wget matches
-Binary file vim.tiny matches
-Binary file unzip matches
-Binary file unrar-nonfree matches
-Binary file troff matches
-Binary file telnet.netkit matches
-Binary file tbl matches
-Binary file soelim matches
-Binary file qt5ct matches
-Binary file preconv matches
-Binary file ppdpo matches
-Binary file ppdi matches
-Binary file ppdhtml matches
-Binary file ppdc matches
-Binary file pic matches
-Binary file perl matches
-Binary file perl5.30.0 matches
-Binary file lshw matches
-Binary file grotty matches
-Binary file grops matches
-Binary file groff matches
-Binary file gnote matches
-Binary file gnome-system-monitor matches
-Binary file gdbserver matches
-Binary file gdb matches
-Binary file ffmpegthumbnailer matches
-Binary file eqn matches
-Binary file dwz matches
-Binary file cjs-console matches
-Binary file apt-sortpkgs matches
-Binary file apt matches
-Binary file apt-mark matches
-Binary file aptitude-curses matches
-Binary file apt-get matches
-Binary file apt-ftparchive matches
-Binary file apt-extracttemplates matches
-Binary file apt-config matches
-Binary file apt-cdrom matches
-Binary file apt-cache matches
-bashbug:CC="gcc"
+x86_64-linux-gnu-gcc-ranlib-9
+x86_64-linux-gnu-gcc-ranlib
+x86_64-linux-gnu-gcc-nm-9
+x86_64-linux-gnu-gcc-nm
+x86_64-linux-gnu-gcc-ar-9
+x86_64-linux-gnu-gcc-ar
+x86_64-linux-gnu-gcc-9
+x86_64-linux-gnu-gcc
+gcc-ranlib-9
+gcc-ranlib
+gcc-nm-9
+gcc-nm
+gcc-ar-9
+gcc-ar
+gcc-9
+gcc
+c99-gcc
+c89-gcc
