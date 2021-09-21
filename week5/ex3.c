@@ -19,7 +19,7 @@ void* producer(void *args) {
         if (filled) continue;
         int item = rand() % N;
         buffer[count] = item;
-        printf ("%d ", buffer[count]);
+        printf ("Produced %d \n", buffer[count]);
         count ++;
         if (count >= N) filled = true;
         empty = false;
@@ -32,7 +32,7 @@ void* consumer(void *args) {
     while (true) {
         if (empty) continue;
         count --;
-        printf ("%d ", buffer[count]);
+        printf ("Consumed %d \n", buffer[count]);
         if (count <= 0) {
             count = 0;
             empty = true;
