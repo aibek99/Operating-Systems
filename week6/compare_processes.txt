@@ -1,0 +1,21 @@
+Input:
+Number of processes: 5
+5
+2 6
+5 2
+1 8
+0 3
+4 4
+
+Output comparison
+
+                           Average TAT     Average WT
+First Come First Served:          12.6              8   (FCFS)
+Shortest Job Algorithm :           9.8            5.2   (SJA)
+Round Robing Algorithm :            14            9.4   (RRA)
+
+Quantum in case of round robin algorithm is: 2
+
+FCFS - in this case average TAT and average WT is in the middle among this three algorithms
+SJA  - in this case average TAT and average WT is minimum among this three algorithms' outputs
+RRA  - in this case average TAT and average WT is maximum among this three algorithms' outputs

@@ -6,12 +6,12 @@
 struct process {
     int tim[6];
 /**
-    int id;            /// Process id - length 10
-    int arrival_t;     /// Arrival time - length 12
-    int burst_t;       /// Burst time - length 10
-    int waiting_t;     /// Waiting time - length 12
-    int completion_t;  /// Completion time - length 15
-    int turn_t;        /// Turnaround time - length 15
+    tim[0]  /// Process id - length 10
+    tim[1]  /// Arrival time - length 12
+    tim[2]  /// Burst time - length 10
+    tim[3]  /// Waiting time - length 12
+    tim[4]  /// Completion time - length 15
+    tim[5]  /// Turnaround time - length 15
 **/
 };
 
@@ -26,6 +26,7 @@ void swap(int *a, int *b) {
 	*b = tmp;
 }
 
+/// swaps two processes data
 void pro_swap(int a, int b) {
     for (int i = 0; i < 6; i ++) {
         swap(&arr[a].tim[i], &arr[b].tim[i]);
@@ -89,9 +90,13 @@ process delete_from_queue(int *sz, int* order) {
     return res;
 }
 
-void solve(int n) {
+/// Implements the shotest first algorithm
+void shortest_first(int n) {
+
     int i = 1, ansz = 0, szofq = 0;
     int order[] = {2, 1, 0, 3, 4, 5};
+
+
     for (int time = 0, execution = 0; ; time ++) {
         execution --;
         if (execution < 0) execution = 0;
@@ -133,15 +138,23 @@ void calculate_TAT(process *arr, int n) {
 
 int main(void) {
     int n;
+
+    printf ("Input the number of processes : ");
     scanf ("%d", &n);
+
     arr = (process*)malloc((n + 1) * 6 * sizeof(int));
     proces = (process*)malloc((n + 1) * 6 * sizeof(int));
     int order[] = {1, 2, 0, 3, 4, 5};
+
+
+    printf ("Input the arrival time and burst time %d times : \n", n);
     for (int i = 1; i <= n; i ++) {
         arr[i].tim[0] = i;
         scanf("%d%d", &arr[i].tim[1], &arr[i].tim[2]);
         sift_up(i, order);
     }
+
+
     int count = n;
     while (count > 0) {
         arr[count] = delete_from_queue(&count, order);
@@ -149,11 +162,15 @@ int main(void) {
     for (int i = 1; i <= n; i ++) {
         proces[i] = arr[n - i + 1];
     }
-    solve(n);
+
+
+    shortest_first(n);
     calculate_CT(proces, n);
     calculate_WT(proces, n);
     calculate_TAT(proces, n);
     print(proces, n);
+
+
     double av_tt = 0, av_wt = 0;
     for (int i = 1; i <= n; i ++) {
         av_tt += proces[i].tim[5];
@@ -164,15 +181,7 @@ int main(void) {
     return EXIT_SUCCESS;
 }
 
-/*
 
-4
-3 4
-9 8
-5 7
-3 2
-
-*/
 
 
 

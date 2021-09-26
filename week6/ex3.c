@@ -2,16 +2,17 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 struct process {
     int tim[6];
 /**
-    int id;            /// Process id - length 10
-    int arrival_t;     /// Arrival time - length 12
-    int burst_t;       /// Burst time - length 10
-    int waiting_t;     /// Waiting time - length 12
-    int completion_t;  /// Completion time - length 15
-    int turn_t;        /// Turnaround time - length 15
+    tim[0]  /// Process id - length 10
+    tim[1]  /// Arrival time - length 12
+    tim[2]  /// Burst time - length 10
+    tim[3]  /// Waiting time - length 12
+    tim[4]  /// Completion time - length 15
+    tim[5]  /// Turnaround time - length 15
 **/
 };
 
@@ -26,6 +27,7 @@ void swap(int *a, int *b) {
 	*b = tmp;
 }
 
+/// swaps two processes data
 void pro_swap(int a, int b) {
     for (int i = 0; i < 6; i ++) {
         swap(&arr[a].tim[i], &arr[b].tim[i]);
@@ -89,40 +91,42 @@ process delete_from_queue(int *sz, int* order) {
     return res;
 }
 
-void solve(int n) {
-    int i = 1, ansz = 0, szofq = 0;
-    int order[] = {2, 1, 0, 3, 4, 5};
-    for (int time = 0, execution = 0; ; time ++) {
-        execution --;
-        if (execution < 0) execution = 0;
-        if (szofq > 0 && execution == 0) {
-            proces[++ ansz] = delete_from_queue(&szofq, order);
-            execution = proces[ansz].tim[2];
-        }
-        while (i <= n && time == proces[i].tim[1]) {
-            add_to_queue(proces[i], &szofq, order);
-            i ++;
-        }
-        if (szofq == 0 && i > n) break;
-    }
-}
+/// time = 0
+/// last_run[] keeps the end of time of the last execution of the i'th process
+/// calculates completion time and waiting time
+void round_robin(int n, int quantum) {
+    int cnt = 0, time = proces[1].tim[1];
+    int rt[n + 1], last_run[n + 1];
 
-
-/// Calculate the Waiting time
-void calculate_WT(process *arr, int n) {
-    for (int i = 2; i <= n; i ++) {
-        arr[i].tim[3] = arr[i].tim[4] - arr[i].tim[1] - arr[i].tim[2];
-        if (arr[i].tim[3] < 0) arr[i].tim[3] = 0;
-    }
-}
-
-/// Calculate the Completion time
-void calculate_CT(process *arr, int n) {
-    arr[0].tim[4] = arr[0].tim[1] + arr[0].tim[2];
+    /// Assigning last_run[] and rt[], where rt is used to keep remaining time for i'th process to finish
     for (int i = 1; i <= n; i ++) {
-        arr[i].tim[4] = arr[i - 1].tim[4] + arr[i].tim[2];
+        rt[i] = proces[i].tim[2];
+        last_run[i] = proces[i].tim[1];
+    }
+
+    /// if time is smaller than arrival time it continues
+    /// otherwise, it will check remained time for completion is bigger than quantum
+    /// if yes, then execute i'th process in quantum
+    /// otherwise, then execute i'th process till the end of the process
+    while (cnt != n) {
+        for (int i = 1; i <= n; i ++) {
+            if (time < proces[i].tim[1] || rt[i] == 0) continue;
+            if (rt[i] > quantum) {
+                proces[i].tim[3] += time - last_run[i];
+                time += quantum;
+                rt[i] -= quantum;
+            } else {
+                proces[i].tim[3] += time - last_run[i];
+                time += rt[i];
+                rt[i] = 0;
+                proces[i].tim[4] = time;
+                cnt ++;
+            }
+            last_run[i] = time;
+        }
     }
 }
+
 
 /// Calculate the Turnaround time
 void calculate_TAT(process *arr, int n) {
@@ -131,17 +135,30 @@ void calculate_TAT(process *arr, int n) {
     }
 }
 
+
+
 int main(void) {
-    int n;
+    int n, quantum;
+
+    printf ("Input the number of processes : ");
     scanf ("%d", &n);
+    printf ("Input the quantum : ");
+    scanf ("%d", &quantum);
+
+
+
     arr = (process*)malloc((n + 1) * 6 * sizeof(int));
     proces = (process*)malloc((n + 1) * 6 * sizeof(int));
-    int order[] = {1, 2, 0, 3, 4, 5};
+    int order[] = {1, 0, 2, 3, 4, 5};
+
+    printf ("Input the arrival time and burst time %d times : \n", n);
     for (int i = 1; i <= n; i ++) {
         arr[i].tim[0] = i;
         scanf("%d%d", &arr[i].tim[1], &arr[i].tim[2]);
         sift_up(i, order);
     }
+
+
     int count = n;
     while (count > 0) {
         arr[count] = delete_from_queue(&count, order);
@@ -149,11 +166,13 @@ int main(void) {
     for (int i = 1; i <= n; i ++) {
         proces[i] = arr[n - i + 1];
     }
-    solve(n);
-    calculate_CT(proces, n);
-    calculate_WT(proces, n);
+
+
+    round_robin(n, quantum);
     calculate_TAT(proces, n);
     print(proces, n);
+
+
     double av_tt = 0, av_wt = 0;
     for (int i = 1; i <= n; i ++) {
         av_tt += proces[i].tim[5];
@@ -163,16 +182,6 @@ int main(void) {
     printf ("Average Waiting time    : %f\n", av_wt / n);
     return EXIT_SUCCESS;
 }
-
-/*
-
-4
-3 4
-9 8
-5 7
-3 2
-
-*/
 
 
 

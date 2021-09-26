@@ -5,6 +5,14 @@
 
 struct process {
     int tim[6];
+/**
+    tim[0]  /// Process id - length 10
+    tim[1]  /// Arrival time - length 12
+    tim[2]  /// Burst time - length 10
+    tim[3]  /// Waiting time - length 12
+    tim[4]  /// Completion time - length 15
+    tim[5]  /// Turnaround time - length 15
+**/
 };
 
 typedef struct process process;
@@ -18,6 +26,7 @@ void swap(int *a, int *b) {
 	*b = tmp;
 }
 
+/// swaps two processes data
 void pro_swap(int a, int b) {
     for (int i = 0; i < 6; i ++) {
         swap(&arr[a].tim[i], &arr[b].tim[i]);
@@ -82,15 +91,6 @@ process delete_from_queue(int *sz, int* order) {
     return res;
 }
 
-/**
-    tim[0]  /// Process id - length 10
-    tim[1]  /// Arrival time - length 12
-    tim[2]  /// Burst time - length 10
-    tim[3]  /// Waiting time - length 12
-    tim[4]  /// Completion time - length 15
-    tim[5]  /// Turnaround time - length 15
-**/
-
 /// Calculate the Waiting time
 void calculate_WT(process *arr, int n) {
     for (int i = 2; i <= n; i ++) {
@@ -116,15 +116,23 @@ void calculate_TAT(process *arr, int n) {
 
 int main(void) {
     int n;
+
+    printf ("Input the number of processes : ");
     scanf ("%d", &n);
+
     arr = (process*)malloc((n + 1) * 6 * sizeof(int));
     proces = (process*)malloc((n + 1) * 6 * sizeof(int));
     int order[] = {1, 2, 0, 3, 4, 5};
+
+
+    printf ("Input the arrival time and burst time %d times : \n", n);
     for (int i = 1; i <= n; i ++) {
         arr[i].tim[0] = i;
         scanf("%d%d", &arr[i].tim[1], &arr[i].tim[2]);
         sift_up(i, order);
     }
+
+
     int count = n;
     while (count > 0) {
         arr[count] = delete_from_queue(&count, order);
@@ -132,9 +140,13 @@ int main(void) {
     for (int i = 1; i <= n; i ++) {
         proces[i] = arr[n - i + 1];
     }
+
+
     calculate_CT(proces, n);
     calculate_WT(proces, n);
     calculate_TAT(proces, n);
+
+
     double av_tt = 0, av_wt = 0;
     for (int i = 1; i <= n; i ++) {
         av_tt += proces[i].tim[5];
