@@ -12,8 +12,11 @@ void* reallocate(void* ptr, int n2) {
         return ptr;
     }
     void* newptr = ptr;
+    printf ("%d\n", n2);
     ptr = malloc(n2 * sizeof(void*));
-    memcpy(ptr, newptr, n2);
+    for (int i = 0; i < n2; i ++)
+        *ptr[i] = *newptr[i];
+//    memcpy(ptr, newptr, n2);
     free(newptr);
     return ptr;
 }
