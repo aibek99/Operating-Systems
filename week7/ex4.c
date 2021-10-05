@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void* reallocate(void* ptr, int n2) {
+int* reallocate(int *ptr, int n2) {
     if (ptr == NULL) {
         return malloc(n2 * sizeof(void*));
     }
@@ -11,14 +11,13 @@ void* reallocate(void* ptr, int n2) {
         ptr = NULL;
         return ptr;
     }
-    void* newptr = ptr;
-    printf ("%d\n", n2);
-    ptr = malloc(n2 * sizeof(void*));
-    for (int i = 0; i < n2; i ++)
-        *ptr[i] = *newptr[i];
-//    memcpy(ptr, newptr, n2);
-    free(newptr);
-    return ptr;
+    int* newptr = malloc(n2*sizeof(int));
+
+    for (int i = 0; i < n2; i++) {
+        newptr[i] = ptr[i];
+    }
+    free(ptr);
+    return newptr;
 }
 
 int main(void) {
