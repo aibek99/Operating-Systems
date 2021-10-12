@@ -1,0 +1,3 @@
+Physical address is an address of memory which exists in RAM. 
+Virtual Address is a pointer to a memory space that is allowed to use for a process.
+
