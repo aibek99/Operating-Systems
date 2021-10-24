@@ -1,0 +1,24 @@
+defualt : 
+1340961 -rwxrwxrwx 1 comp comp 14 Oct 25 03:34 _ex3.txt
+
+
+appended step by step : 
+1340961 -rw-rw-rw- 1 comp comp 14 Oct 25 03:34 _ex3.txt
+1340961 -rwxrw-rwx 1 comp comp 14 Oct 25 03:34 _ex3.txt
+1340961 -rwxrwxrwx 1 comp comp 14 Oct 25 03:34 _ex3.txt
+
+
+To read and write options are allowed for user and group.
+660 means : 110110000 - rw-rw---- - permission for user  : to read, to write
+                                    permission for group : to read, to write
+                                    permission for other : 
+
+Every option is allowed for everyone, except writing for other.
+775 means : 111111101 - rwxrwxr-x - permission for user  : to read, to write, to execute
+                                    permission for group : to read, to write, to execute
+                                    permission for other : to read, to execute
+ 
+Every option is allowed for everyone.
+777 means : 111111111 - rwxrwxrwx - permission for user  : to read, to write, to execute
+                                    permission for group : to read, to write, to execute
+                                    permission for other : to read, to write, to execute
