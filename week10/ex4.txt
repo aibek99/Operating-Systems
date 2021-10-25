@@ -1,0 +1,2 @@
+File    -   Hard Links
+inode : 1442654  -  file1 link1 
