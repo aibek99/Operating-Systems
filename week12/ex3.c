@@ -16,6 +16,10 @@ int main(void) {
 
     int map[1000];
 
+    printf ("P + E  - I passed the Exam!\n");
+    printf ("C + A + P  - Get some cappuccino!\n");
+    printf ("A + I + B + E  - Aibek, you got A for this lab!)\n");
+
     while (1) {
         struct input_event event;
         read(check, &event, sizeof(event));
@@ -30,6 +34,9 @@ int main(void) {
             if (map[46] == 1 && map[30] == 1 && map[25] == 1) {
                 printf ("Get some cappuccino!\n");
             }
+            if (map[30] == 1 && map[23] == 1 && map[48] == 1 && map[18] == 1) {
+                printf ("Aibek, you got A for this lab!)\n");
+            }
         }
         else if (event.value == 2) {
             map[event.code] = 1;
@@ -39,7 +46,11 @@ int main(void) {
             if (map[46] == 1 && map[30] == 1 && map[25] == 1) {
                 printf ("Get some cappuccino!\n");
             }
+            if (map[30] == 1 && map[23] == 1 && map[48] == 1 && map[18] == 1) {
+                printf ("Aibek, you got A for this lab!)\n");
+            }
         }
+        fflush(stdout);
     }
     return EXIT_SUCCESS;
 }
