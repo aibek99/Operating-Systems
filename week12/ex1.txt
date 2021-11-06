@@ -50,3 +50,25 @@
     d258-d25b : ahci
   d260-d26f : 0000:00:0d.0
     d260-d26f : ahci
+
+
+
+
+What are dma1, pic1 and timer1?
+
+
+
+
+What do they represent?
+
+
+
+
+
+
+
+
+
+
+
+

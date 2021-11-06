@@ -13,25 +13,35 @@ int main(void) {
         puts("FAILED TO OPEN THE FILE!");
         return check;
     }
+
+    int map[1000];
+
     while (1) {
         struct input_event event;
         read(check, &event, sizeof(event));
-        if (event.value == event.code && event.code == 0) continue;
         if (event.value == 0) {
-            printf ("RELEASED %d %#06x %d\n", event.value, (int)event.code, (int)event.code);
-            fflush(stdout);
+            map[event.code] = 0;
         }
         else if (event.value == 1) {
-            printf ("PRESSED %d %#06x %d\n", event.value, (int)event.code, (int)event.code);
-            fflush(stdout);
+            map[event.code] = 1;
+            if (map[25] == 1 && map[18] == 1) {
+                printf ("I passed the Exam!\n");
+            }
+            if (map[46] == 1 && map[30] == 1 && map[25] == 1) {
+                printf ("Get some cappuccino!\n");
+            }
         }
         else if (event.value == 2) {
-            printf ("REPEATED %d %#06x %d\n", event.value, (int)event.code, (int)event.code);
-            fflush(stdout);
+            map[event.code] = 1;
+            if (map[25] == 1 && map[18] == 1) {
+                printf ("I passed the Exam!\n");
+            }
+            if (map[46] == 1 && map[30] == 1 && map[25] == 1) {
+                printf ("Get some cappuccino!\n");
+            }
         }
     }
     return EXIT_SUCCESS;
 }
-
 
 
