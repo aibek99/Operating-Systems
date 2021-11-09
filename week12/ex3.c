@@ -15,6 +15,7 @@ int main(void) {
     }
 
     int map[1000];
+    memset(map, 0, sizeof(map));
 
     printf ("P + E  - I passed the Exam!\n");
     printf ("C + A + P  - Get some cappuccino!\n");
