@@ -36,7 +36,7 @@ int main(void){
             cnt = 0;
         }
     }
-    printf ("%d %d\n", n, m);
+    //printf ("%d %d\n", n, m);
     fseek(rf, 0, SEEK_SET);
 
     int E[m + 5];
