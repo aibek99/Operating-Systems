@@ -1,0 +1,10 @@
+Deadlocks can be prevented by breaking at least one of the four required conditions: mutual exclusion, hold & wait, no preemption, circular wait. 
+
+The general idea behind deadlock avoidance is to prevent deadlocks from ever happening, by breaking at least one of the mentioned conditions at the top.
+This requires more information about each process, AND tends to lead to low device utilization.
+
+If deadlocks are not avoided, then another approach is to detect when they have occurred and recover somehow.
+In addition to the performance hit of constantly checking for deadlocks, a policy / algorithm must be in place for recovering from deadlocks, and there is potential for lost work when processes must be aborted or have their resources preempted.
+
+So, deadlock preventing is better than other strategies 'cause it required less info about processes. Deadlock avoidance is less effective than preventing but still more effective than recovery. 
+
